@@ -3,24 +3,24 @@
 
 //https://www.arduino.cc/en/Tutorial/ShiftOut
 
-#define SER_pin 4 //attach to SER
-#define RCLK_pin 5 // attach to RCLK
-#define  SRCLK_pin 6 // attach to SRCLK
+#define SerialDataInPIn 4 //attach to SER
+#define StorageRegisterClockPin 5 
+#define  ShiftRegisterClockPin 6 // attach to SRCLK
 
 byte leds = 0;
- 
+
 void updateShiftRegister() 
 {
-     digitalWrite(RCLK_pin, LOW);
-     shiftOut(SER_pin, SRCLK_pin, LSBFIRST, leds);
-     digitalWrite(RCLK_pin, HIGH);
+     digitalWrite(StorageRegisterClockPin, LOW);
+     shiftOut(SerialDataInPIn, ShiftRegisterClockPin, LSBFIRST, leds);
+     digitalWrite(StorageRegisterClockPin, HIGH);
 }
 
 void setup() //called once
 {
-     pinMode(RCLK_pin, OUTPUT);
-     pinMode(SER_pin, OUTPUT);  
-     pinMode(SRCLK_pin, OUTPUT);
+     pinMode(StorageRegisterClockPin, OUTPUT);
+     pinMode(SerialDataInPIn, OUTPUT);  
+     pinMode(ShiftRegisterClockPin, OUTPUT);
 }
 
 void loop() 
@@ -28,10 +28,11 @@ void loop()
      leds = 0;
      updateShiftRegister();
      delay(500);
-     for (int i = 0; i < 8; i++){
-          bitSet(leds, i);
+     for (int i = 0; i < 256; i++){
+//          bitSet(leds, i);
+          leds=i;
           updateShiftRegister();
-          delay(500);
+          delay(50);
      }
 }
  
