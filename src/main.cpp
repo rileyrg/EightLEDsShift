@@ -6,14 +6,14 @@ int dataPin = 4;
 
 byte leds = 0;
  
-void updateShiftRegister()
+void updateShiftRegister() //tst for treemacs gitmode
 {
      digitalWrite(latchPin, LOW);
      shiftOut(dataPin, clockPin, LSBFIRST, leds);
      digitalWrite(latchPin, HIGH);
 }
 
-void setup() 
+void setup() //called once
 {
      pinMode(latchPin, OUTPUT);
      pinMode(dataPin, OUTPUT);  
