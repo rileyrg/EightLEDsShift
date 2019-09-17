@@ -13,12 +13,12 @@ byte leds = 0;
 bool fReset=false;
 
 void setSR(){
-     digitalWrite(SerialResetPin,HIGH);
      fReset=false;
+     digitalWrite(SerialResetPin,HIGH);
 }
 void resetSR(){
-     digitalWrite(SerialResetPin,LOW);
      fReset=true;;
+     digitalWrite(SerialResetPin,LOW);
 }
 
 void updateShiftRegister(byte v) 
@@ -54,7 +54,7 @@ void loop()
      }
      else
      {
-          updateShiftRegister(leds++);
+          updateShiftRegister(leds++); 
           delay(100);
      }
 }
