@@ -1,23 +1,26 @@
 #include<Arduino.h>
 
-int latchPin = 5;
-int clockPin = 6;
-int dataPin = 4; 
+
+//https://www.arduino.cc/en/Tutorial/ShiftOut
+
+#define SER_pin 4 //attach to SER
+#define RCLK_pin 5 // attach to RCLK
+#define  SRCLK_pin 6 // attach to SRCLK
 
 byte leds = 0;
  
-void updateShiftRegister() //tst for treemacs gitmode
+void updateShiftRegister() 
 {
-     digitalWrite(latchPin, LOW);
-     shiftOut(dataPin, clockPin, LSBFIRST, leds);
-     digitalWrite(latchPin, HIGH);
+     digitalWrite(RCLK_pin, LOW);
+     shiftOut(SER_pin, SRCLK_pin, LSBFIRST, leds);
+     digitalWrite(RCLK_pin, HIGH);
 }
 
 void setup() //called once
 {
-     pinMode(latchPin, OUTPUT);
-     pinMode(dataPin, OUTPUT);  
-     pinMode(clockPin, OUTPUT);
+     pinMode(RCLK_pin, OUTPUT);
+     pinMode(SER_pin, OUTPUT);  
+     pinMode(SRCLK_pin, OUTPUT);
 }
 
 void loop() 
